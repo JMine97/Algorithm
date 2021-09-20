@@ -1,11 +1,20 @@
 '''
-dfs 풀이
+배운점
+- dfs는 들어오자마자 방문처리 해주자
 '''
 
 import sys
 
 sys.setrecursionlimit(2000)
 T = int(input())
+
+
+def dfs(idx):  # 반복문과 유사
+    visited[idx] = True #dfs 들어오자마자 방문처리
+    number = num[idx]
+    if not visited[number]:
+        dfs(number)
+
 
 for i in range(T):
     N = int(input())
@@ -14,22 +23,9 @@ for i in range(T):
     end_idx = N + 1
     visited = [False] * end_idx
 
-
-    def dfs(idx, start_value):
-        if visited[idx]:
-            return
-
-        if start_value == num[idx]:
-            global cnt
-            cnt += 1
-            return
-
-        if not visited[idx]:
-            visited[idx] = True
-            dfs(num[idx], start_value)
-
-
     cnt = 0
-    for i in range(1, end_idx):
-        dfs(i, i)
+    for j in range(1, end_idx):
+        if not visited[j]:
+            cnt += 1
+            dfs(j)
     print(cnt)
